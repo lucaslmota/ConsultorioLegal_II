@@ -1,9 +1,11 @@
 
+using Cl.Core.Shared.ModelViews;
 using CL_Data.Context;
 using CL_Data.Repository;
 using CL_Manager.Implementation;
 using CL_Manager.Interfaces;
 using CL_Manager.ManagerInterface;
+using CL_Manager.Mappings;
 using CL_Manager.Validator;
 using FluentValidation;
 using FluentValidation.AspNetCore;
@@ -31,7 +33,10 @@ namespace CL_WebApi
 
             // Add FluentValidation
             builder.Services.AddFluentValidationAutoValidation();
-            builder.Services.AddValidatorsFromAssemblyContaining<ClienteValidator>();
+            builder.Services.AddValidatorsFromAssemblyContaining<ClienteValidatorView>();
+            builder.Services.AddValidatorsFromAssemblyContaining<ClienteUpdateValidatorView>();
+
+            builder.Services.AddAutoMapper(typeof(ClienteViewMappingProfile), typeof(ClienteUpdateViewMappingProfile));
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();

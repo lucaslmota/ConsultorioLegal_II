@@ -1,4 +1,5 @@
-﻿using CL_Core.Domain;
+﻿using Cl.Core.Shared.ModelViews;
+using CL_Core.Domain;
 using CL_Manager.ManagerInterface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -28,17 +29,17 @@ namespace CL_WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> InsertCliente([FromBody] Cliente cliente)
+        public async Task<IActionResult> InsertCliente([FromBody] ClienteView clienteView)
         {
-            var clienteAdd = await _clienteManager.InsertClienteAsync(cliente);
+            var clienteAdd = await _clienteManager.InsertClienteAsync(clienteView);
 
-            return CreatedAtAction(nameof(GetId), new { id = cliente.ClienteId }, cliente);
+            return CreatedAtAction(nameof(GetId), new { id = clienteAdd.ClienteId }, clienteAdd);
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateClente([FromBody] Cliente cliente)
+        public async Task<IActionResult> UpdateClente([FromBody] ClienteUpdateView clienteUpdateView)
         {
-            var clienteUpdate = await _clienteManager.UpdadeteClienteAsync(cliente);
+            var clienteUpdate = await _clienteManager.UpdadeteClienteAsync(clienteUpdateView);
             if (clienteUpdate is null)
             {
                 return NotFound();

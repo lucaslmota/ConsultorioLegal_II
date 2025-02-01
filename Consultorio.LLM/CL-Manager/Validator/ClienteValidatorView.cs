@@ -1,4 +1,5 @@
-﻿using CL_Core.Domain;
+﻿using Cl.Core.Shared.ModelViews;
+using CL_Core.Domain;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -8,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace CL_Manager.Validator
 {
-    public class ClienteValidator : AbstractValidator<Cliente>
+    public class ClienteValidatorView : AbstractValidator<ClienteView>
     {
-        public ClienteValidator()
+        public ClienteValidatorView()
         {
             RuleFor(x => x.ClienteNome).NotNull().NotEmpty().MinimumLength(10).MaximumLength(80).WithMessage("Nome pode estar muito curto ou muito grande");
             RuleFor(x => x.DtNascimento).NotNull().NotEmpty().LessThan(DateTime.Now).GreaterThan(DateTime.Now.AddYears(-130)).WithMessage("Data de nascimento inválida!");
