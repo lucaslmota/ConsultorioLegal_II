@@ -4,6 +4,9 @@ using CL_Data.Repository;
 using CL_Manager.Implementation;
 using CL_Manager.Interfaces;
 using CL_Manager.ManagerInterface;
+using CL_Manager.Validator;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace CL_WebApi
@@ -25,6 +28,10 @@ namespace CL_WebApi
             // Add services to the container.
 
             builder.Services.AddControllers();
+
+            // Add FluentValidation
+            builder.Services.AddFluentValidationAutoValidation();
+            builder.Services.AddValidatorsFromAssemblyContaining<ClienteValidator>();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
