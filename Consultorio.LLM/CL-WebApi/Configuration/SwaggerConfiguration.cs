@@ -1,4 +1,5 @@
 ﻿using Microsoft.OpenApi.Models;
+using System.Reflection;
 
 namespace CL_WebApi.Configuration
 {
@@ -8,7 +9,29 @@ namespace CL_WebApi.Configuration
         {
             services.AddSwaggerGen(c => 
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api estudo .net", Version = "v1" });
+                c.SwaggerDoc("v1", 
+                    new OpenApiInfo 
+                    { 
+                        Title = "Api estudo .net",
+                        Version = "v1",
+                        Description = "Uma api para exercitar novamente",
+                        Contact = new OpenApiContact
+                        {
+                            Name = "Lucas Mota - Bacharel em SI",
+                            Email = "lucaslmota0431@gmail.com"
+                        },
+                        License = new OpenApiLicense
+                        {
+                            Name = "OSD",
+                            Url = new Uri("https://opensource.org/osd")
+                        }
+                    });
+
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+                xmlPath = Path.Combine(AppContext.BaseDirectory, "Cl.Core.Shared.xml");
+                c.IncludeXmlComments(xmlPath);
             });
         }
 

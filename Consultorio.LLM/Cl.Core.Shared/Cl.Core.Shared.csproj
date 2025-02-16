@@ -6,4 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <PropertyGroup>
+	<GenerateDocumentationFile>True</GenerateDocumentationFile>
+	<DocumentationFile>E:\Consultorio_LLM\Consultorio.LLM\CL-WebApi\bin\Debug\net8.0\Cl.Core.Shared.xml</DocumentationFile>
+	<NoWarn>$(NoWarn);1591</NoWarn>
+  </PropertyGroup>
+
 </Project>
