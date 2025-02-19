@@ -1,5 +1,7 @@
 ﻿using Microsoft.OpenApi.Models;
 using System.Reflection;
+using MicroElements.Swashbuckle.FluentValidation;
+using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
 
 namespace CL_WebApi.Configuration
 {
@@ -9,9 +11,9 @@ namespace CL_WebApi.Configuration
         {
             services.AddSwaggerGen(c => 
             {
-                c.SwaggerDoc("v1", 
-                    new OpenApiInfo 
-                    { 
+                c.SwaggerDoc("v1",
+                    new OpenApiInfo
+                    {
                         Title = "Api estudo .net",
                         Version = "v1",
                         Description = "Uma api para exercitar novamente",
@@ -33,6 +35,8 @@ namespace CL_WebApi.Configuration
                 xmlPath = Path.Combine(AppContext.BaseDirectory, "Cl.Core.Shared.xml");
                 c.IncludeXmlComments(xmlPath);
             });
+
+            services.AddFluentValidationRulesToSwagger();
         }
 
         public static void UseSwaggerConfiguration(this IApplicationBuilder builder)
