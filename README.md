@@ -44,3 +44,11 @@ public IActionResult CreateCliente([FromBody] Cliente cliente)
     // Retorna um status 201 Created, incluindo a URL do novo recurso
     return CreatedAtAction("GetCliente", new { id = cliente.Id }, cliente);
 }
+````
+###
+app.ApplicationServices.GetRequiredService<IServiceScopeFactory>(): Obtém a fábrica de escopos de serviço.
+.CreateScope(): Cria um escopo de serviço, garantindo que os serviços obtidos dentro dele tenham um ciclo de vida apropriado (ou seja, são descartados corretamente após o uso).
+Isso é útil porque o DbContext geralmente é registrado com um escopo específico (ex.: Scoped ou Transient), e o escopo do ApplicationServices normalmente é Singleton.
+
+Aqui, o código obtém uma instância de ClContext, que provavelmente é uma subclasse de DbContext usada no Entity Framework Core.
+Ele é resolvido a partir do escopo de serviço criado anteriormente.
