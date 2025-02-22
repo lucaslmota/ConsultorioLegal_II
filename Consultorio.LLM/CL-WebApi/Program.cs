@@ -20,10 +20,7 @@ namespace CL_WebApi
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddDbContext<ClContext>(options =>
-            {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("ClConnection"));
-            });
+            builder.Services.AddDataBaseConfigiration(builder.Configuration);
 
             builder.Services.AddControllers();
 
@@ -48,6 +45,8 @@ namespace CL_WebApi
                 //app.UseSwaggerUI();
                 
             }
+
+            app.UseDataBaseConfiguration();
 
             app.UseSwaggerConfiguration();
 
