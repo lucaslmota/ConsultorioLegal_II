@@ -45,7 +45,7 @@ public IActionResult CreateCliente([FromBody] Cliente cliente)
     return CreatedAtAction("GetCliente", new { id = cliente.Id }, cliente);
 }
 ````
-###
+# Aula 10 - 22/02/2025
 app.ApplicationServices.GetRequiredService<IServiceScopeFactory>(): Obtém a fábrica de escopos de serviço.
 .CreateScope(): Cria um escopo de serviço, garantindo que os serviços obtidos dentro dele tenham um ciclo de vida apropriado (ou seja, são descartados corretamente após o uso).
 Isso é útil porque o DbContext geralmente é registrado com um escopo específico (ex.: Scoped ou Transient), e o escopo do ApplicationServices normalmente é Singleton.
