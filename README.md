@@ -52,3 +52,12 @@ Isso é útil porque o DbContext geralmente é registrado com um escopo específ
 
 Aqui, o código obtém uma instância de ClContext, que provavelmente é uma subclasse de DbContext usada no Entity Framework Core.
 Ele é resolvido a partir do escopo de serviço criado anteriormente.
+# Aula 11 - Logs - 26/02/2025
+ Aqui foi criado logs para 
+ -Registrar logs da aplicação
+ -Salvar em um arquivo
+ -Ultilizar de forma assincrona
+ -Utilizar arquivo de configuração por ambiente
+ -Registrar Logs em tempo de execução
+ -Salvar Logs no formato JSON
+ -Logar as exceções com mais detalhes
