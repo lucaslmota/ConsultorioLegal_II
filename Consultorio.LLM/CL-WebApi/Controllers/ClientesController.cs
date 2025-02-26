@@ -3,6 +3,7 @@ using CL_Core.Domain;
 using CL_Manager.ManagerInterface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SerilogTimings;
 
 namespace CL_WebApi.Controllers
 {
@@ -11,9 +12,11 @@ namespace CL_WebApi.Controllers
     public class ClientesController : ControllerBase
     {
         private readonly IClienteManager _clienteManager;
-        public ClientesController(IClienteManager clienteManager)
+        private readonly ILogger _logger;
+        public ClientesController(IClienteManager clienteManager, ILogger<ClientesController> logger)
         {
             _clienteManager = clienteManager;
+            _logger = logger;
         }
 
         /// <summary>
@@ -25,6 +28,7 @@ namespace CL_WebApi.Controllers
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Get()
         {
+            _logger.LogInformation("Teste");
             return Ok(await _clienteManager.GetClienteAsync());
         }
 
@@ -47,9 +51,16 @@ namespace CL_WebApi.Controllers
         [HttpPost]
         public async Task<IActionResult> InsertCliente([FromBody] ClienteView clienteView)
         {
-            var clienteAdd = await _clienteManager.InsertClienteAsync(clienteView);
+            _logger.LogInformation("Objeto enviado: {@clienteView}", clienteView);
+            Cliente clienteInserido;
+            using(Operation.Time("Tempo de add de cliente."))
+            {
+                _logger.LogInformation("Requisição de um novo cliente");
+                clienteInserido = await _clienteManager.InsertClienteAsync(clienteView);
+            }
+            //var clienteAdd = await _clienteManager.InsertClienteAsync(clienteView);
 
-            return CreatedAtAction(nameof(GetId), new { id = clienteAdd.ClienteId }, clienteAdd);
+            return CreatedAtAction(nameof(GetId), new { id = clienteInserido.ClienteId }, clienteInserido);
         }
 
         /// <summary>

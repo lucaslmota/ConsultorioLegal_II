@@ -11,6 +11,7 @@ using CL_WebApi.Configuration;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 namespace CL_WebApi
 {
@@ -18,6 +19,11 @@ namespace CL_WebApi
     {
         public static void Main(string[] args)
         {
+            //Log.Logger = new LoggerConfiguration().Enrich.FromLogContext().WriteTo.Console().WriteTo.File("log.txt").CreateLogger();
+            IConfigurationRoot configuration = GetConfiguration();
+
+            ConfiguraLog(configuration);
+
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddDataBaseConfigiration(builder.Configuration);
@@ -35,6 +41,8 @@ namespace CL_WebApi
             builder.Services.AddEndpointsApiExplorer();
             //builder.Services.AddSwaggerGen();
             builder.Services.AddSwaggerConfiguration();
+
+            builder.Host.UseSerilog();
 
             var app = builder.Build();
 
@@ -58,6 +66,25 @@ namespace CL_WebApi
             app.MapControllers();
 
             app.Run();
+        }
+
+        private static void ConfiguraLog(IConfigurationRoot configuration)
+        {
+            Log.Logger = new LoggerConfiguration()
+                .ReadFrom.Configuration(configuration)
+                .CreateLogger();
+        }
+
+        private static IConfigurationRoot GetConfiguration()
+        {
+            string? ambiente = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .AddJsonFile($"appsettings.{ambiente}.json")
+                .Build();
+            return configuration;
         }
     }
 }
