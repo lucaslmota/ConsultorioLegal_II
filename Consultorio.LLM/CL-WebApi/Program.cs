@@ -46,12 +46,15 @@ namespace CL_WebApi
 
             var app = builder.Build();
 
+            app.UseExceptionHandler("/erro");
+
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 //app.UseSwagger();
                 //app.UseSwaggerUI();
-                
+                app.UseDeveloperExceptionPage();
+
             }
 
             app.UseDataBaseConfiguration();
