@@ -12,6 +12,7 @@ namespace CL_WebApi.Configuration
             services.AddFluentValidationAutoValidation();
             services.AddValidatorsFromAssemblyContaining<ClienteValidatorView>();
             services.AddValidatorsFromAssemblyContaining<ClienteUpdateValidatorView>();
+            services.AddValidatorsFromAssemblyContaining<EnderecoValidatorView>();
         }
     }
 }

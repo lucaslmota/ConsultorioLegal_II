@@ -12,6 +12,7 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using System.Text.Json.Serialization;
 
 namespace CL_WebApi
 {
@@ -28,7 +29,11 @@ namespace CL_WebApi
 
             builder.Services.AddDataBaseConfigiration(builder.Configuration);
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+                });
 
             // Adcionando as chamadas das config
             builder.Services.UseFluenteValidationConfig();

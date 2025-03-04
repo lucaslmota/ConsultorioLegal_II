@@ -16,6 +16,8 @@ namespace CL_Manager.Mappings
             CreateMap<ClienteView, Cliente>()
                 .ForMember(destino => destino.Criacao, opcoes => opcoes.MapFrom(origem => DateTime.Now))
                 .ForMember(destino => destino.DtNascimento, opcoes => opcoes.MapFrom(origme => origme.DtNascimento.Date));
+
+            CreateMap<EnderecoView, Endereco>();
         }
     }
 }

@@ -34,5 +34,7 @@ namespace Cl.Core.Shared.ModelViews
         /// </summary>
         /// <example>057.693.133-07</example>
         public string Documento { get; set; } = string.Empty;
+
+        public EnderecoView Endereco { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using CL_Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CL_Data.Migrations
 {
     [DbContext(typeof(ClContext))]
-    partial class ClContextModelSnapshot : ModelSnapshot
+    [Migration("20250303211723_add-endereco")]
+    partial class addendereco
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -65,16 +68,21 @@ namespace CL_Data.Migrations
 
             modelBuilder.Entity("CL_Core.Domain.Endereco", b =>
                 {
-                    b.Property<int>("ClienteId")
+                    b.Property<int>("EnderecoId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("CEP")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EnderecoId"));
+
+                    b.Property<int>("CEP")
+                        .HasColumnType("int");
 
                     b.Property<string>("Cidade")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ClienteId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Complemento")
                         .IsRequired()
@@ -92,7 +100,10 @@ namespace CL_Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ClienteId");
+                    b.HasKey("EnderecoId");
+
+                    b.HasIndex("ClienteId")
+                        .IsUnique();
 
                     b.ToTable("Enderecos");
                 });

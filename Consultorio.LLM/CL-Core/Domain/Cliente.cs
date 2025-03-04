@@ -16,5 +16,8 @@ namespace CL_Core.Domain
         public string Documento { get; set; } = string.Empty;
         public DateTime Criacao { get; set; }
         public DateTime? UltimaAtualizacao { get; set; }
+
+        //Relação 1:1
+        public Endereco Endereco { get; set; }
     }
 }
