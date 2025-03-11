@@ -25,16 +25,14 @@ namespace Cl.Core.Shared.ModelViews
         /// <example>M</example>
         public string Sexo { get; set; } = string.Empty;
         /// <summary>
-        /// Telefone
-        /// </summary>
-        /// <example>(88)9.9942-6105</example>
-        public string Telefone { get; set; } = string.Empty;
-        /// <summary>
         /// Cpf ou rg
         /// </summary>
         /// <example>057.693.133-07</example>
         public string Documento { get; set; } = string.Empty;
 
-        public EnderecoView Endereco { get; set; }
+        public required EnderecoView Endereco { get; set; }
+
+
+        public ICollection<TelefoneView>? Telefones { get; set; }
     }
 }

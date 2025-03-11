@@ -18,6 +18,7 @@ namespace CL_Manager.Mappings
                 .ForMember(destino => destino.DtNascimento, opcoes => opcoes.MapFrom(origme => origme.DtNascimento.Date));
 
             CreateMap<EnderecoView, Endereco>();
+            CreateMap<TelefoneView, Telefone>();
         }
     }
 }

@@ -13,6 +13,7 @@ namespace CL_Data.Context
     {
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Endereco> Enderecos { get; set; }
+        public DbSet<Telefone> Telefones { get; set; }
 
         public ClContext(DbContextOptions<ClContext> options) : base(options){}
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -21,6 +22,7 @@ namespace CL_Data.Context
 
             modelBuilder.ApplyConfiguration(new ClienteConfiguration());
             modelBuilder.ApplyConfiguration(new EnderecoConfiguration());
+            modelBuilder.ApplyConfiguration(new TelefoneConfiguration());
         }
     }
 }
