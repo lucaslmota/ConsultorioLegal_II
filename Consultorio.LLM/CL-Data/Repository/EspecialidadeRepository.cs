@@ -18,9 +18,9 @@ namespace CL_Data.Repository
             _context = context;
         }
 
-        public async Task<bool> ExisteAsync(int id)
+        public bool ExisteAsync(int id)
         {
-            return await _context.Especialidades.AnyAsync(p => p.Id == id);
+            return  _context.Especialidades.Find(id) != null;
         }
     }
 }

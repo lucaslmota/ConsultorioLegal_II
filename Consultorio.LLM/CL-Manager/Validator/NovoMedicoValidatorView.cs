@@ -11,13 +11,13 @@ namespace CL_Manager.Validator
 {
     public class NovoMedicoValidatorView : AbstractValidator<NovoMedico>
     {
-        public NovoMedicoValidatorView()
+        public NovoMedicoValidatorView(IEspecialidadeRepository repository)
         {
             RuleFor(p => p.Nome).NotNull().NotEmpty().MaximumLength(200);
 
             RuleFor(p => p.CRM).NotNull().NotEmpty().GreaterThan(0);
             
-            RuleForEach(p => p.Especialidades).SetValidator(new ReferenciaEspecialidadeValidatorView());
+            RuleForEach(p => p.Especialidades).SetValidator(new ReferenciaEspecialidadeValidatorView(repository));
         }
     }
 }

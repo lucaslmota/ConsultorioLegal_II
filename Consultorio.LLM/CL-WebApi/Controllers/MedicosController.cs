@@ -10,10 +10,12 @@ namespace CL_WebApi.Controllers
     public class MedicosController : ControllerBase
     {
         private readonly IMedicoManager _manager;
+        private readonly ILogger _logger;
 
-        public MedicosController(IMedicoManager manager)
+        public MedicosController(IMedicoManager manager, ILogger<MedicosController> logger)
         {
             _manager = manager;
+            _logger = logger;
         }
 
         /// <summary>
@@ -24,6 +26,7 @@ namespace CL_WebApi.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Get()
         {
+            _logger.LogInformation("Teste medico");
             return Ok(await _manager.GetMedicosAsync());
         }
 
@@ -47,8 +50,9 @@ namespace CL_WebApi.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(MedicoView), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Post(NovoMedico medico)
+        public async Task<IActionResult> Post([FromBody] NovoMedico medico)
         {
+            _logger.LogInformation("Meidico: {@novoMedico}", medico);
             var medicoInserido = await _manager.InsertMedicoAsync(medico);
             return CreatedAtAction(nameof(Get), new { id = medicoInserido.Id }, medicoInserido);
         }

@@ -8,6 +8,6 @@ namespace CL_Manager.Interfaces
 {
     public interface IEspecialidadeRepository
     {
-        Task<bool> ExisteAsync(int id);
+        bool ExisteAsync(int id);
     }
 }

@@ -14,6 +14,7 @@ namespace CL_WebApi.Configuration
             services.AddValidatorsFromAssemblyContaining<ClienteUpdateValidatorView>();
             services.AddValidatorsFromAssemblyContaining<EnderecoValidatorView>();
             services.AddValidatorsFromAssemblyContaining<TelefoneValidatorView>();
+            services.AddValidatorsFromAssemblyContaining<NovoMedicoValidatorView>();
         }
     }
 }
