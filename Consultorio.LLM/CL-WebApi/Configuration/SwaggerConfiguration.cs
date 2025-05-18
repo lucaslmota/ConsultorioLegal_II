@@ -34,9 +34,10 @@ namespace CL_WebApi.Configuration
                 c.IncludeXmlComments(xmlPath);
                 xmlPath = Path.Combine(AppContext.BaseDirectory, "Cl.Core.Shared.xml");
                 c.IncludeXmlComments(xmlPath);
+
+                c.UseInlineDefinitionsForEnums();
             });
 
-            services.AddFluentValidationRulesToSwagger();
         }
 
         public static void UseSwaggerConfiguration(this IApplicationBuilder builder)

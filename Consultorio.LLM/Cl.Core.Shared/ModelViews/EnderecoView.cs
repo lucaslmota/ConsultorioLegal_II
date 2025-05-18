@@ -10,8 +10,8 @@ namespace Cl.Core.Shared.ModelViews
     {
         /// <example>63700-112</example>
         public string CEP { get; set; } = string.Empty;
-        /// <example>Ceará</example>
-        public string Estado { get; set; } = string.Empty;
+        
+        public EEstadoView Estado { get; set; }
         /// <example>Crateús</example>
         public string Cidade { get; set; } = string.Empty;
         /// <example>Rua Dr João Tomé</example>

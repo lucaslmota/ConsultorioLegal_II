@@ -11,7 +11,7 @@ namespace CL_Core.Domain
         public int ClienteId { get; set; }
         public string ClienteNome { get; set; } = string.Empty;
         public DateTime DtNascimento { get; set; }
-        public string Sexo { get; set; } = string.Empty;
+        public Sexo Sexo { get; set; }
         public ICollection<Telefone>? Telefones { get; set; }
         public string Documento { get; set; } = string.Empty;
         public DateTime Criacao { get; set; }

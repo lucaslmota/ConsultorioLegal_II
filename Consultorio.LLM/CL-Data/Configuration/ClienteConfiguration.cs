@@ -16,6 +16,7 @@ namespace CL_Data.Configuration
             builder.Property(p => p.ClienteNome).HasMaxLength(200).IsRequired();
             builder.Property(p => p.DtNascimento).IsRequired();
             builder.Property(p => p.Documento).IsRequired().HasMaxLength(14);
+            builder.Property(p => p.Sexo).HasConversion(p => p.ToString(), p => (Sexo)Enum.Parse(typeof(Sexo),p));
         }
     }
 }

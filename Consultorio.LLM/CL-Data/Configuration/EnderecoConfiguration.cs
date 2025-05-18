@@ -16,6 +16,7 @@ namespace CL_Data.Configuration
         {
             builder.HasKey(p => p.ClienteId);
             builder.HasOne(p => p.Cliente).WithOne(p => p.Endereco).HasForeignKey<Endereco>(p => p.ClienteId);
+            builder.Property(p => p.Estado).HasConversion(p => p.ToString(),p => (Estado)Enum.Parse(typeof(Estado), p));
         }
     }
 }

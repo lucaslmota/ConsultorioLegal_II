@@ -13,7 +13,7 @@ namespace CL_Manager.Validator
         public EnderecoValidatorView()
         {
             RuleFor(p => p.CEP).NotNull().NotEmpty().Matches(@"^\d{5}-\d{3}$").WithMessage("Formato de CEP incorreto!");
-            RuleFor(p => p.Estado).NotNull().NotEmpty().MaximumLength(30).WithMessage("O campo de estado tem que estar preenchido.");
+            RuleFor(p => p.Estado).NotNull();
         }
     }
 }

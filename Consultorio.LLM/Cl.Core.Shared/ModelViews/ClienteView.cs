@@ -23,7 +23,7 @@ namespace Cl.Core.Shared.ModelViews
         /// Sexo
         /// </summary>
         /// <example>M</example>
-        public string Sexo { get; set; } = string.Empty;
+        public ESexoView Sexo { get; set; }
         /// <summary>
         /// Cpf ou rg
         /// </summary>
