@@ -14,5 +14,10 @@ namespace CL_Core.Domain
 
         public ICollection<Especialidade> Especialidades { get; set; }
 
+        public Medico()
+        {
+            Especialidades = new HashSet<Especialidade>();
+        }
+
     }
 }

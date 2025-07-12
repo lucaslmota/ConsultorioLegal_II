@@ -13,12 +13,15 @@ namespace CL_Manager.Mappings
     {
         public ClienteViewMappingProfile()
         {
-            CreateMap<ClienteView, Cliente>()
+            CreateMap<NewCliente, Cliente>()
                 .ForMember(destino => destino.Criacao, opcoes => opcoes.MapFrom(origem => DateTime.Now))
                 .ForMember(destino => destino.DtNascimento, opcoes => opcoes.MapFrom(origme => origme.DtNascimento.Date));
 
-            CreateMap<EnderecoView, Endereco>();
-            CreateMap<TelefoneView, Telefone>();
+            CreateMap<NewEndereco, Endereco>();
+            CreateMap<NewTelefone, Telefone>();
+            CreateMap<Cliente, ClienteView>();
+            CreateMap<Endereco, EnderecoView>();
+            CreateMap<Telefone, TelefoneView>();
         }
     }
 }

@@ -16,6 +16,6 @@ namespace Cl.Core.Shared.ModelViews
         }
         public string Id { get; set; }
         public DateTime Data { get; set; }
-        public String Mensagem { get; set; } = string.Empty;
+        public string Mensagem { get; set; } = string.Empty;
     }
 }

@@ -59,16 +59,17 @@ namespace CL_Data.Repository
         }
 
         //Delete
-        public async Task DeleteClienteAsync(int id)
+        public async Task<Cliente> DeleteClienteAsync(int id)
         {
             var consultCliente  =  await _context.Clientes.FindAsync(id);
 
-            if(consultCliente is not null)
+            if(consultCliente is null)
             {
-                _context.Clientes.Remove(consultCliente);
-                await _context.SaveChangesAsync();
-
+                return null;
             }
+            var clienteRemovido = _context.Clientes.Remove(consultCliente);
+            await _context.SaveChangesAsync();
+            return clienteRemovido.Entity;
         }
     }
 }

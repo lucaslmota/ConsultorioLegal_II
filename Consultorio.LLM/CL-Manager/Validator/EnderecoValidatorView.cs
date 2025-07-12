@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CL_Manager.Validator
 {
-    public class EnderecoValidatorView : AbstractValidator<EnderecoView>
+    public class EnderecoValidatorView : AbstractValidator<NewEndereco>
     {
         public EnderecoValidatorView()
         {

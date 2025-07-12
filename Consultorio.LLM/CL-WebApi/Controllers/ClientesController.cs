@@ -12,7 +12,7 @@ namespace CL_WebApi.Controllers
     public class ClientesController : ControllerBase
     {
         private readonly IClienteManager _clienteManager;
-        private readonly ILogger _logger;
+        private readonly ILogger<ClientesController> _logger;
         public ClientesController(IClienteManager clienteManager, ILogger<ClientesController> logger)
         {
             _clienteManager = clienteManager;
@@ -28,9 +28,14 @@ namespace CL_WebApi.Controllers
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Get()
         {
-            //throw new Exception("Erro de teste");
-            _logger.LogInformation("Teste");
-            return Ok(await _clienteManager.GetClienteAsync());
+            var clientes = await _clienteManager.GetClienteAsync();
+            if (clientes.Any())
+            {
+                _logger.LogInformation("Teste");
+                return Ok(clientes);
+            }
+            
+            return NotFound();
         }
 
         /// <summary>
@@ -41,7 +46,12 @@ namespace CL_WebApi.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetId(int id)
         {
-            return Ok(await _clienteManager.GetIdClienteAsync(id));
+            var cliente = await _clienteManager.GetIdClienteAsync(id);
+            if(cliente.ClienteId == 0)
+            {
+                return NotFound();
+            }
+            return Ok(cliente);
         }
 
         /// <summary>
@@ -50,18 +60,19 @@ namespace CL_WebApi.Controllers
         /// <param name="clienteView"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> InsertCliente([FromBody] ClienteView clienteView)
+        public async Task<IActionResult> InsertCliente([FromBody] NewCliente newCliente)
         {
-            _logger.LogInformation("Objeto enviado: {@clienteView}", clienteView);
-            Cliente clienteInserido;
+            _logger.LogInformation("Objeto enviado: {@newCliente}", newCliente);
+
+            ClienteView clienteInserido;
             using(Operation.Time("Tempo de add de cliente."))
             {
                 _logger.LogInformation("Requisição de um novo cliente");
-                clienteInserido = await _clienteManager.InsertClienteAsync(clienteView);
+                clienteInserido = await _clienteManager.InsertClienteAsync(newCliente);
             }
             //var clienteAdd = await _clienteManager.InsertClienteAsync(clienteView);
 
-            return CreatedAtAction(nameof(GetId), new { id = clienteInserido.ClienteId }, clienteInserido);
+            return CreatedAtAction(nameof(GetId), new { id = clienteInserido }, clienteInserido);
         }
 
         /// <summary>
@@ -83,12 +94,16 @@ namespace CL_WebApi.Controllers
         /// <summary>
         /// Exclui um cliente
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id" example = "123" ></param>
+        /// <remarks>Ao excluir um cliente o mesmo será removido permanentemente da base.</remarks>
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCliente(int id)
         {
-            await _clienteManager.DeleteClienteAsync(id);
+            var clienteExcluido = await _clienteManager.DeleteClienteAsync(id);
+            if (clienteExcluido is null)
+            {
+                return NotFound();
+            }
             return NoContent();
         }
     }

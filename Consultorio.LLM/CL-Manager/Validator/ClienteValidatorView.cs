@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CL_Manager.Validator
 {
-    public class ClienteValidatorView : AbstractValidator<ClienteView>
+    public class ClienteValidatorView : AbstractValidator<NewCliente>
     {
         public ClienteValidatorView()
         {

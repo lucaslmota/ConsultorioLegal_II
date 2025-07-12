@@ -13,6 +13,6 @@ namespace CL_Manager.Interfaces
         Task<Cliente?> GetIdClienteAsync(int id);
         Task<Cliente> InsertClienteAsync(Cliente cliente);
         Task<Cliente?> UpdadeteClienteAsync(Cliente cliente);
-        Task DeleteClienteAsync(int id);
+        Task<Cliente> DeleteClienteAsync(int id);
     }
 }

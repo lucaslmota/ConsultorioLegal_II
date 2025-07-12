@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Cl.Core.Shared.ModelViews
 {
-    public class ClienteUpdateView : ClienteView
+    public class ClienteUpdateView : NewCliente
     {
         public int ClienteId { get; set; }
     }

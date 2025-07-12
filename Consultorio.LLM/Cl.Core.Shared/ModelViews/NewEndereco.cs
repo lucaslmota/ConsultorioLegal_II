@@ -6,18 +6,19 @@ using System.Threading.Tasks;
 
 namespace Cl.Core.Shared.ModelViews
 {
-    public class EnderecoView : ICloneable
+    public class NewEndereco
     {
-        public string CEP { get; set; }
-        public EEstadoView Estado { get; set; }
-        public string Cidade { get; set; } = string.Empty;
-        public string Logradouro { get; set; } = string.Empty;
-        public string Numero { get; set; } = string.Empty;
-        public string Complemento { get; set; } = string.Empty;
+        /// <example>63700-112</example>
+        public string CEP { get; set; } = string.Empty;
 
-        public object Clone()
-        {
-            return MemberwiseClone();
-        }
+        public EEstadoView Estado { get; set; }
+        /// <example>Crateús</example>
+        public string Cidade { get; set; } = string.Empty;
+        /// <example>Rua Dr João Tomé</example>
+        public string Logradouro { get; set; } = string.Empty;
+        /// <example>726</example>
+        public string Numero { get; set; } = string.Empty;
+        /// <example>Príximo ao Céu azul</example>
+        public string Complemento { get; set; } = string.Empty;
     }
 }

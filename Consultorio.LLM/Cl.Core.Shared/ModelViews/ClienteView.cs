@@ -6,33 +6,33 @@ using System.Threading.Tasks;
 
 namespace Cl.Core.Shared.ModelViews
 {
-    public class ClienteView
+    public class ClienteView : ICloneable
     {
-        /// <summary>
-        /// Nome do cliente
-        /// </summary>
-        /// <example>Lucas Lima Mota</example>
-        public string ClienteNome { get; set; } = string.Empty;
-
-        /// <summary>
-        /// Data de nascimento
-        /// </summary>
-        /// <example>1993-04-23</example>
+        public int ClienteId { get; set; }
+        public string ClienteNome { get; set; }
         public DateTime DtNascimento { get; set; }
-        /// <summary>
-        /// Sexo
-        /// </summary>
-        /// <example>M</example>
         public ESexoView Sexo { get; set; }
-        /// <summary>
-        /// Cpf ou rg
-        /// </summary>
-        /// <example>057.693.133-07</example>
-        public string Documento { get; set; } = string.Empty;
+        public ICollection<TelefoneView> Telefones { get; set; }
 
-        public required EnderecoView Endereco { get; set; }
+        public string Documento { get; set; }
+        public DateTime Criacao { get; set; }
+        public DateTime? UltimaAtualizacao { get; set; }
 
+        public EnderecoView Endereco { get; set; }
 
-        public ICollection<TelefoneView>? Telefones { get; set; }
+        public object Clone()
+        {
+            var cliente = (ClienteView)MemberwiseClone();
+            cliente.Endereco = (EnderecoView)cliente.Endereco.Clone();
+            var telefones = new List<TelefoneView>();
+            cliente.Telefones.ToList().ForEach(p => telefones.Add((TelefoneView)p.Clone()));
+            cliente.Telefones = telefones;
+            return cliente;
+        }
+
+        public ClienteView CloneTipado()
+        {
+            return (ClienteView)Clone();
+        }
     }
 }
