@@ -33,7 +33,7 @@ namespace Cl.Core.Shared.ModelViews
         /// <example>057.693.133-07</example>
         public string Documento { get; set; } = string.Empty;
 
-        public required NewEndereco Endereco { get; set; }
+        public NewEndereco Endereco { get; set; }
 
 
         public ICollection<NewTelefone>? Telefones { get; set; }

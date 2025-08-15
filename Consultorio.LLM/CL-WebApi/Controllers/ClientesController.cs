@@ -47,7 +47,7 @@ namespace CL_WebApi.Controllers
         public async Task<IActionResult> GetId(int id)
         {
             var cliente = await _clienteManager.GetIdClienteAsync(id);
-            if(cliente.ClienteId == 0)
+            if(cliente?.ClienteId == 0)
             {
                 return NotFound();
             }
@@ -57,7 +57,7 @@ namespace CL_WebApi.Controllers
         /// <summary>
         /// Adiciona um novo cliente
         /// </summary>
-        /// <param name="clienteView"></param>
+        /// <param name="newCliente"></param>
         /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> InsertCliente([FromBody] NewCliente newCliente)
