@@ -3,6 +3,7 @@ using Cl.Core.Shared.ModelViews;
 using CL_Core.Domain;
 using CL_Manager.Interfaces;
 using CL_Manager.ManagerInterface;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,11 +16,13 @@ namespace CL_Manager.Implementation
     {
         private readonly IClienteRepository _clienteRepository;
         private readonly IMapper _mapper;
+        private readonly ILogger<ClienteManager> _logger;
 
-        public ClienteManager(IClienteRepository clienteRepository, IMapper mapper)
+        public ClienteManager(IClienteRepository clienteRepository, IMapper mapper, ILogger<ClienteManager> logger)
         {
             _clienteRepository = clienteRepository;
             _mapper = mapper;
+            _logger = logger;
         }
 
         public async Task<IEnumerable<ClienteView>> GetClienteAsync()
